@@ -1,0 +1,15 @@
+---
+# tasks file for proxy_server_role
+#
+
+  - name: 'install haproxy software'
+    package:
+      name: haproxy
+      state: present
+
+  - name: 'copying haproxy.cfg to /etc/haproxy/haproxy.cfg'
+    template:
+      src: 'haproxy.cfg'
+      dest: '/etc/haproxy/'
+    notify:
+      - Restart haproxy

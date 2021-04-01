@@ -1,0 +1,12 @@
+---
+# vars file for ec2_instance_provision
+region: <region>
+type: t2.micro
+ami_id: ami-0a9d27a9f4f5c0efc
+want_public_ip: yes
+count: 3
+subnet_id: subnet-ce1108a6
+key_name: <key-name>
+AWS_ACCESS_KEY_ID: <put-access-key-here>
+AWS_SECRET_ACCESS_KEY: <put-secret-key-here>                
+

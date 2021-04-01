@@ -1,0 +1,34 @@
+- hosts: '127.0.0.1'
+  vars_files:
+          - cred.yml
+  tasks:
+          - name: 'ec2-instance-provisioning'
+            include_role:
+                    name: ec2-provision
+            register: x
+
+          - ec2_instance_info:
+                  aws_access_key: "{{ access_key }}"
+                  aws_secret_key: "{{ secret_key }}"
+            register: x
+
+          - name: 'debug'
+            debug:
+                    msg: "{{ x['instances'] }}"
+
+
+
+          - name: 'adding entry'
+            blockinfile:
+                    path: ip.txt
+                    block: |
+                            [web]
+                            {% for i in x['instances'] %}
+                            {% if i['network_interfaces'] %}
+                            {{ i['network_interfaces'][0]['association']['public_ip'] }}
+                            {% endif %}
+                            {% endfor %}
+
+          
+
+

@@ -1,0 +1,4 @@
+---
+# vars file for proxy_server_role
+
+port: 80

@@ -1,0 +1,11 @@
+- hosts: web[1:]
+  tasks:
+          - include_role:
+                  name: myapache
+
+
+- hosts: web[0]
+  tasks:
+          - include_role:
+                  name: myloadbalancer
+

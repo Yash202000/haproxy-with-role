@@ -1,0 +1,22 @@
+---
+# tasks file for webserver_role
+
+  - name: "downloading httpd"
+    package:
+      name: httpd
+      state: present
+
+  - name: 'downloading php'
+    package:
+      name: php
+      state: present
+
+  - name: "copy content to index.html file"
+    copy:
+      src: "index.php"
+      dest: "/var/www/html/index.php"
+    notify:
+    - Restart httpd
+
+  
+

@@ -1,0 +1,24 @@
+---
+# tasks file for ec2_instance_provision
+
+- amazon.aws.ec2:
+      aws_access_key: '{{ AWS_ACCESS_KEY_ID }}'
+      aws_secret_key: '{{ AWS_SECRET_ACCESS_KEY }}'
+      key_name: '{{ key_name }}'
+      instance_type: '{{ type }}'
+      region: '{{ region }}'
+      image: '{{ ami_id }}'
+      wait: yes
+      state: present
+      assign_public_ip: '{{ want_public_ip }}'
+      count: '{{ count }}'
+      vpc_subnet_id: '{{ subnet_id }}'
+  register: ec2
+
+- name: Wait for SSH to come up
+  wait_for:
+      host: "{{ item.public_dns_name }}"
+      port: 22
+      state: started
+  loop: "{{ ec2.instances }}"
+

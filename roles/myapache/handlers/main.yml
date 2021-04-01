@@ -1,0 +1,8 @@
+---
+# handlers file for webserver_role
+
+- name: Restart httpd
+  service:
+      name: "httpd"
+      state: "restarted"
+      enabled: yes
