@@ -5,7 +5,7 @@
           - name: 'ec2-instance-provisioning'
             include_role:
                     name: ec2-provision
-            register: x
+            
 
           - ec2_instance_info:
                   aws_access_key: "{{ access_key }}"
